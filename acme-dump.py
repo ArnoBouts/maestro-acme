@@ -47,7 +47,7 @@ def write_cert(storage_dir, domain, cert_content):
     cert_path = os.path.join(storage_dir, '%s.pem' % (domain,))
     with open(cert_path, 'wb') as cert_file:
         cert_file.write(cert_content)
-    os.chmod(cert_path, 0o600)
+    os.chmod(cert_path, 0o644)
 
 
 def read_certs(acme_json_path):
