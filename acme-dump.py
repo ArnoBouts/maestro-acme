@@ -54,10 +54,10 @@ def read_certs(acme_json_path):
     with open(acme_json_path) as acme_json_file:
         acme_json = json.load(acme_json_file)
 
-    certs_json = acme_json['DomainsCertificate']['Certs']
+    certs_json = acme_json['Certificates']
     certs = {}
     for cert in certs_json:
-        domain = cert['Domains']['Main']
+        domain = cert['Domain']['Main']
         domain_cert = cert['Certificate']
         # Only get the first cert (should be the most recent)
         if domain not in certs:
