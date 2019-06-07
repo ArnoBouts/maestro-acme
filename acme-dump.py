@@ -58,17 +58,16 @@ def read_certs(acme_json_path):
     certs = {}
     for cert in certs_json:
         domain = cert['Domain']['Main']
-        domain_cert = cert['Certificate']
         # Only get the first cert (should be the most recent)
         if domain not in certs:
-            certs[domain] = to_pem_data(domain_cert)
+            certs[domain] = to_pem_data(cert)
 
     return certs
 
 
 def to_pem_data(json_cert):
     return b''.join((base64.b64decode(json_cert['Certificate']),
-                     base64.b64decode(json_cert['PrivateKey'])))
+                     base64.b64decode(json_cert['Key'])))
 
 
 def dump(acme_json, dest_dir):
